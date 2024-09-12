@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Price: ${{ product.price }}</p>
+
+    <h2>Submit a review</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review.author }} (Rating: {{ review.rating }})</strong>
+            <p>{{ review.text }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'product_list' %}">Back to product list</a>
+</body>
+</html>
